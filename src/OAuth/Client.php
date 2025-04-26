@@ -104,8 +104,9 @@ class Client {
     if(in_array($method, ['post', 'put', 'patch'])) {
       if($file = RequestUtil::prepareFile($args[1] ?? [])) {
         $opts['multipart'] = $file;
-      }
-      else {
+      } elseif ($video = RequestUtil::prepareVideo($args[1] ?? [])) {
+                $opts['multipart'] = $video;
+      } else {
         $opts['form_params'] = $args[1] ?? [];
       }
     }
@@ -338,7 +339,7 @@ class Client {
 
   /**
    * Check the scopes of the current API key (client ID).
-   * 
+   *
    * @link https://developers.etsy.com/documentation/reference/#operation/tokenScopes
    * @param string $token
    * @return array
