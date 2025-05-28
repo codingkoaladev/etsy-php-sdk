@@ -2,6 +2,7 @@
 
 namespace Etsy\Resources;
 
+use Etsy\Collection;
 use Etsy\Resource;
 
 /**
@@ -17,12 +18,12 @@ class ListingVariationImage extends Resource {
    * 
    * @param int $shop_id
    * @param int $listing_id
-   * @return \Etsy\Collection[\Etsy\Resources\ListingVariationImage]
+   * @return Collection[\Etsy\Resources\ListingVariationImage]
    */
   public static function all(
     int $shop_id,
     int $listing_id
-  ): \Etsy\Collection {
+  ): Collection {
     return self::request(
       "GET",
       "/application/shops/{$shop_id}/listings/{$listing_id}/variation-images",
@@ -30,19 +31,19 @@ class ListingVariationImage extends Resource {
     );
   }
 
-  /**
-   * Update variation images for a listing.
-   * 
-   * @param int $shop_id
-   * @param $listing_id
-   * @param array $variation_images
-   * @return \Etsy\Resources\ListingVariationImage
-   */
+    /**
+     * Update variation images for a listing.
+     *
+     * @param int $shop_id
+     * @param int $listing_id
+     * @param array $variation_images
+     * @return ListingVariationImage|Collection|null
+     */
   public static function update(
     int $shop_id,
     int $listing_id,
     array $variation_images
-  ): ?\Etsy\Resources\ListingVariationImage {
+  ): ListingVariationImage|Collection|null {
     return self::request(
       "POST",
       "/application/shops/{$shop_id}/listings/{$listing_id}/variation-images",
